@@ -14,7 +14,7 @@ pthread_mutex_t one = PTHREAD_MUTEX_INITIALIZER;
 pthread_mutex_t two = PTHREAD_MUTEX_INITIALIZER;
 
 // doubly linked list data structure
-struct Node {
+typedef struct Node {
   int data;
   int priority;
   int burst_number;
@@ -22,18 +22,18 @@ struct Node {
  
   struct Node* next;
   struct Node* prev;
-};
+} Node;
 
 struct Node* ready_head;
 struct Node* ready_tail;
 
 struct Node* io_head;
-struct Node* io_head;
+struct Node* io_tail;
 
 struct Node* dq;
 
-static void en_q(Node* head, Node* tail, int data, int burst){
-  struct Node* new_node = (struct Node*)malloc(sizeof());
+static void en_q(Node* head,Node* tail, int data, int burst){
+  struct Node* new_node = (Node*)malloc(sizeof());
   new_node->data = data;
   new_node->burst = burst;
   new_data->next = NULL;
@@ -48,6 +48,7 @@ static void en_q(Node* head, Node* tail, int data, int burst){
     new_node-> = tail;
     tail = new_node;
   } 
+  return;
 }
 
 static void de_q(Node* head, Node* tail){
@@ -55,7 +56,8 @@ static void de_q(Node* head, Node* tail){
   	dq = head;
     head = head->next;
     head->prev = NULL;
-    #free(dq)
+    // free(dq)
+  return;
 }
 
 static void sort_q(Node* head, Node* tail){
