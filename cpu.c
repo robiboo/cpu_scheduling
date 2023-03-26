@@ -32,12 +32,12 @@ struct Node* io_tail;
 
 struct Node* dq;
 
-static void en_q(Node* head,Node* tail, int data, int burst){
-  struct Node* new_node = (Node*)malloc(sizeof());
+void en_q(Node* head,Node* tail, int data, int burst){
+  struct Node* new_node =(Node*)malloc(sizeof(Node));
   new_node->data = data;
-  new_node->burst = burst;
-  new_data->next = NULL;
-  new_data->prev = NULL;
+  new_node->burst_number = burst;
+  new_node->next = NULL;
+  new_node->prev = NULL;
   
   if (head == NULL){
     head = new_node;
@@ -45,26 +45,23 @@ static void en_q(Node* head,Node* tail, int data, int burst){
   }
   else{
     tail->next = new_node;
-    new_node-> = tail;
+    new_node->prev = tail;
     tail = new_node;
   } 
   return;
 }
 
-static void de_q(Node* head, Node* tail){
+void de_q(Node* head, Node* tail){
   if (head != NULL){
   	dq = head;
     head = head->next;
     head->prev = NULL;
     // free(dq)
   return;
-}
-
-static void sort_q(Node* head, Node* tail){
-  return 0;
+  }
 }
   
-static void *read_file(void *input_file){
+void *read_file(void *input_file){
   printf("inside read file\n");
   FILE *fp = fopen((char *)input_file, "r");
   // check if opening file was a success
@@ -80,9 +77,6 @@ static void *read_file(void *input_file){
   while (fgets(line, LINE_LEN, fp) != NULL){
     printf("%s", line);
 //     if the thread encounters sleep, then thread sleeps before continuing to read file
-		if (line[0] == "sleep") {
-      printf("need to sleep");
-    }
   }
     
   fclose(fp);
@@ -143,7 +137,7 @@ int main(int argc, char *argv[]){
       return 0;
     }
   }
-  
+  return 0;  
   // printf("Input File Name                  : %s\n", input_file)
   // printf("CPU Scheduling Alg               : %s", sched_algo)
   // if algorithm is RR, also print out the quantum
@@ -155,5 +149,4 @@ int main(int argc, char *argv[]){
   // printf("Throughput                       : ")
   // printf("Avg. Turnaround Time             : ")
   // printf("Avg. Waiting Time in Ready Queue : ")
-  
 }
